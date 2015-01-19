@@ -1,0 +1,25 @@
+<table class="xlist_table" cellspacing="1" cellpadding="0"  border="1" style="background-color:#fff; border:solid 3px;">
+  <tr>
+    <th>ID</th>
+    <th>Code</th>
+	<% @questions.each do |question| %>
+		<% next if question.display_order == 1 %>
+		<th><%= "[" +question.display_order.to_s + "]" + question.text.html_safe  %></th>
+	<% end %>
+  </tr>
+
+<% @response_sets.each do |r_set| %>
+  <tr style="border-bottom:solid 1px #333;">
+    <td><%=h r_set.id %></td>
+    <td><%=h r_set.access_code %></td>
+	<% @questions.each do |question| %>
+		<% next if question.display_order == 1 %>
+		<td><%= display_response(r_set,question).html_safe %></td>
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "Back", results_path %>
